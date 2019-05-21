@@ -20,7 +20,7 @@ class Jogador:
         self.acertos = 0
         self.erros = 0
 
-jogador = Jogador()
+humano = Jogador()
 
 maquina = Jogador()
 
@@ -56,14 +56,10 @@ def imprimir_tabuleiro(tab):
 
 
 def calcular_pontuacao(tab):
-    acertos = 0
-    erros = 0
-    for linha in tab:
-        for elemento in linha:
-            if elemento=='X':
-                acertos+=1
-            elif elemento=='E':
-                erros+=1     
+    
+    acertos = sum(map(lambda a: 1 if a=='X' else 0, [item for sublist in tab for item in sublist]))
+    erros = sum(map(lambda a: 1 if a=='E' else 0, [item for sublist in tab for item in sublist]))
+        
     return acertos, erros
     
 def verificar_navios(tab):
@@ -85,14 +81,14 @@ def exibir_pontuacao(jogHumMaq):
 
 def main():
     preencher_tabuleiro(maquina.tabuleiro)
-    preencher_tabuleiro(jogador.tabuleiro)
+    preencher_tabuleiro(humano.tabuleiro)
     acerto_atual = 0
     vez = 1
-    while verificar_navios(maquina.tabuleiro) != 0 and verificar_navios(jogador.tabuleiro) != 0:
+    while verificar_navios(maquina.tabuleiro) != 0 and verificar_navios(humano.tabuleiro) != 0:
         clear()
         print('maquina: ')
-        acerto_atual = exibir_pontuacao(jogador)
-        print('jogador: ')
+        acerto_atual = exibir_pontuacao(humano)
+        print('humano: ')
         acerto_atual = exibir_pontuacao(maquina)
 
         if(vez % 2):
@@ -100,8 +96,8 @@ def main():
             imprimir_tabuleiro(maquina.tabuleiro)
             #acerto_atual = exibir_pontuacao(maquina)
             print('')
-            imprimir_tabuleiro(jogador.tabuleiro)
-            #acerto_atual = exibir_pontuacao(jogador)
+            imprimir_tabuleiro(humano.tabuleiro)
+            #acerto_atual = exibir_pontuacao(humano)
             print("Atirar:\n\tlinha: ", end='')
             linha = input()
             print("\tColuna: ", end='')
@@ -125,8 +121,8 @@ def main():
                 input()
         else:
             print("VEZ DA MAQUINA")
-            imprimir_tabuleiro(jogador.tabuleiro)
-            #acerto_atual = exibir_pontuacao(jogador)
+            imprimir_tabuleiro(humano.tabuleiro)
+            #acerto_atual = exibir_pontuacao(humano)
             print('')
             imprimir_tabuleiro(maquina.tabuleiro)   
             #acerto_atual = exibir_pontuacao(maquina)
@@ -136,10 +132,10 @@ def main():
             print("\tColuna: ", end='')
             coluna = input()
             try:    
-                atirar(jogador.tabuleiro,int(linha), int(coluna))
-                if verificar_navios(jogador.tabuleiro) != 0:
+                atirar(humano.tabuleiro,int(linha), int(coluna))
+                if verificar_navios(humano.tabuleiro) != 0:
                     print("Fim de Jogo! Máquina Venceu!!")
-                    imprimir_tabuleiro(jogador.tabuleiro)
+                    imprimir_tabuleiro(humano.tabuleiro)
             except ValueError:
                 print("Você deve digitar somente números!")
                 print("Pressione Enter para continuar")
@@ -153,7 +149,7 @@ def main():
                 input()
         
 
-        # VEZ = par jogador, VEZ = impar maquina
+        # VEZ = par humano, VEZ = impar maquina
         vez += 1       
         
     
