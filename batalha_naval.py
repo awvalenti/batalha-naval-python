@@ -12,26 +12,17 @@ def clear():
     else: 
         _ = system('clear') 
 
-tabuleiroJ = [['A','A','A','A'],
-            ['A','A','A','A'],
-            ['A','A','A','A'],
-            ['A','A','A','A']]
-
-tabuleiroM = [['A','A','A','A'],
-            ['A','A','A','A'],
-            ['A','A','A','A'],
-            ['A','A','A','A']]
 
 class Jogador:
     
-    def __init__(self, tabuleiro):
-        self.tabuleiro = tabuleiro
+    def __init__(self):
+        self.tabuleiro = [['A' for x in range(4)] for y in range(4)]
         self.acertos = 0
         self.erros = 0
 
-jogador = Jogador(tabuleiroJ)
+jogador = Jogador()
 
-maquina = Jogador(tabuleiroM)
+maquina = Jogador()
 
 def preencher_tabuleiro(tab):
     listaNavios = [
