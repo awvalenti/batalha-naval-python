@@ -99,10 +99,18 @@ def main():
     vez = 1
     while verificar_navios(maquina.tabuleiro) != 0 and verificar_navios(jogador.tabuleiro) != 0:
         clear()
+        print('maquina: ')
+        acerto_atual = exibir_pontuacao(jogador)
+        print('jogador: ')
+        acerto_atual = exibir_pontuacao(maquina)
+
         if(vez % 2):
-            print("VEZ DA JOGADOR")
+            print("VEZ DO JOGADOR")
             imprimir_tabuleiro(maquina.tabuleiro)
-            acerto_atual = exibir_pontuacao(jogador)
+            #acerto_atual = exibir_pontuacao(maquina)
+            print('')
+            imprimir_tabuleiro(jogador.tabuleiro)
+            #acerto_atual = exibir_pontuacao(jogador)
             print("Atirar:\n\tlinha: ", end='')
             linha = input()
             print("\tColuna: ", end='')
@@ -112,7 +120,6 @@ def main():
                 if verificar_navios(maquina.tabuleiro) != 0:
                     print("Fim de Jogo! Jogador Venceu!!")
                     imprimir_tabuleiro(maquina.tabuleiro)
-
 
             except ValueError:
                 print("Você deve digitar somente números!")
@@ -128,7 +135,11 @@ def main():
         else:
             print("VEZ DA MAQUINA")
             imprimir_tabuleiro(jogador.tabuleiro)
-            acerto_atual = exibir_pontuacao(maquina)
+            #acerto_atual = exibir_pontuacao(jogador)
+            print('')
+            imprimir_tabuleiro(maquina.tabuleiro)   
+            #acerto_atual = exibir_pontuacao(maquina)
+       
             print("Atirar:\n\tlinha: ", end='')
             linha = input()
             print("\tColuna: ", end='')
@@ -149,6 +160,7 @@ def main():
             except Exception:
                 print("Não sei o que deu mas deu ruim")
                 input()
+        
 
         # VEZ = par jogador, VEZ = impar maquina
         vez += 1       
